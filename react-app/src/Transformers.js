@@ -37,11 +37,11 @@ function Transformers() {
       });
       let resJson = await res.json();
       if (res.status === 200){
-        console.log("title submitted successfully");
-        console.log(loading);
-        console.log(resJson["images"]);
+        console.log("data submitted successfully");
         setLoading(false);
-        setImages(resJson["images"]);
+        if (resJson["images"] != 0){
+          setImages(resJson["images"]);
+        }
       }else{
         console.log("Some error occured");
       }
@@ -52,11 +52,16 @@ function Transformers() {
 
   return(
     <div className="full-container">
+
       {loading == true && images.length == 0 && (
-        <h1>loading data</h1>
+        <div className="loading-page">
+          <img src="/loading.gif" alt="loading img"/>
+        </div>
       )}
+
+
       {loading == false && images.length == 0 && (
-        <div className="full-container">
+        <div className="form-page">
           <div className="logo-container">
             <img src="./logo.webp"/>
             <h1>Transformers</h1>
@@ -137,9 +142,20 @@ function Transformers() {
         </div>
       )}
 
+
+
       {loading == false && images.length != 0 && (
-        <h1>showing images</h1>
+        <div className="images-page">
+          <div className="image-container">
+            {images.map((image, index) => (
+              <img key={index} src={`http://localhost:8000${image}`} alt={`image-${index-1}`}/>
+            ))}
+          </div>
+        </div>
       )}
+
+
+
     </div>
   )
  }
