@@ -14,7 +14,6 @@ def index(request):
         form_data = json.loads(request.body.decode('utf-8'))
         print(form_data)
         form = CheckboxForm(form_data)
-        response_data = {'pic1': 'pic1_url'}
         if form.is_valid():
             title = form.cleaned_data['title']
             rm_null_attr = form.cleaned_data['rm_null_attr']
@@ -26,6 +25,8 @@ def index(request):
             topic_detection = form.cleaned_data['topic_detection']
             print("form post succeeded")
             print(title, rm_null_attr, cld_words, lang_dist, data_dist, stance_dist, local_dist, topic_detection)
+            images = process_data(title, rm_null_attr, cld_words, lang_dist, data_dist, stance_dist, local_dist)
+            response_data = {'images':images}
 
             print("\n\n\n")
             return HttpResponse(json.dumps(response_data), content_type="application/json")

@@ -4,6 +4,10 @@ import './Transformers.css';
 
 function Transformers() {
   // const options = ["rm_null_attr", "cld_words", "lang_dist", "data_dist", "stance_dist", "local_dist", "topic_detection"]
+  // const [buttonClicked, ]
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const [title, setTitle] = useState("");
   const [rm_null_attr, setRm_null_attr] = useState(false);
   const [cld_words, setCld_words] = useState(false);
@@ -17,6 +21,7 @@ function Transformers() {
     event.preventDefault();
     console.log("React hates us");
     try {
+      setLoading(true);
       let res = await fetch("http://localhost:8000/", {
         method: "POST",
         body: JSON.stringify({
@@ -32,9 +37,11 @@ function Transformers() {
       });
       let resJson = await res.json();
       if (res.status === 200){
-        // setTitle("");
         console.log("title submitted successfully");
-        console.log(resJson)
+        console.log(loading);
+        console.log(resJson["images"]);
+        setLoading(false);
+        setImages(resJson["images"]);
       }else{
         console.log("Some error occured");
       }
@@ -43,86 +50,96 @@ function Transformers() {
     }
   };
 
+  return(
+    <div className="full-container">
+      {loading == true && images.length == 0 && (
+        <h1>loading data</h1>
+      )}
+      {loading == false && images.length == 0 && (
+        <div className="full-container">
+          <div className="logo-container">
+            <img src="./logo.webp"/>
+            <h1>Transformers</h1>
+          </div>
+          <div className="form-container">
+            <form onSubmit={handelSubmit}>
+              <label className="form-label" htmlFor="name">Title:</label> 
+              <input
+                className="form-input"
+                type="text"
+                id="name"
+                name="title"
+                onChange={(e) => setTitle(e.target.value)}
+              /> 
 
-  return (
-    <div className="form-page-style">
-      <div className="logo-container">
-        <img src="./logo.webp"/>
-        <h1>Transformers</h1>
-      </div>
-      <div className="form-container">
-        <form onSubmit={handelSubmit}>
-          <label className="form-label" htmlFor="name">Title:</label> 
-          <input
-            className="form-input"
-            type="text"
-            id="name"
-            name="title"
-            onChange={(e) => setTitle(e.target.value)}
-          /> 
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="rm_null_attr"
+                  onChange={(e) => setRm_null_attr(e.target.checked)}
+                /> remove null attributes
+              </label>
 
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              name="rm_null_attr"
-              onChange={(e) => setRm_null_attr(e.target.checked)}
-            /> remove null attributes
-          </label>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="cld_words"
+                  onChange={(e) => setCld_words(e.target.checked)}
+                /> cloud of words
+              </label>
 
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              name="cld_words"
-              onChange={(e) => setCld_words(e.target.checked)}
-            /> cloud of words
-          </label>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="lang_dist"
+                  onChange={(e) => setLang_dist(e.target.checked)}
+                /> language distribution
+              </label>
 
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              name="lang_dist"
-              onChange={(e) => setLang_dist(e.target.checked)}
-            /> language distribution
-          </label>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="data_dist"
+                  onChange={(e) => setData_dist(e.target.checked)}
+                /> data distribution
+              </label>
 
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              name="data_dist"
-              onChange={(e) => setData_dist(e.target.checked)}
-            /> data distribution
-          </label>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="stance_dist"
+                  onChange={(e) => setStance_dist(e.target.checked)}
+                /> stance distribution
+              </label>
 
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              name="stance_dist"
-              onChange={(e) => setStance_dist(e.target.checked)}
-            /> stance distribution
-          </label>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="local_dist"
+                  onChange={(e) => setLocal_dist(e.target.checked)}
+                /> local distribution
+              </label>
 
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              name="local_dist"
-              onChange={(e) => setLocal_dist(e.target.checked)}
-            /> local distribution
-          </label>
-
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              name="topic_detection"
-              onChange={(e) => setTopic_detection(e.target.checked)}
-            /> topic detection
-          </label>
+              <label className="checkbox-label">
+                <input
+                  type="checkbox"
+                  name="topic_detection"
+                  onChange={(e) => setTopic_detection(e.target.checked)}
+                /> topic detection
+              </label>
 
 
-          <div className="submit-button-wrapper"> 
-            <button className="submit-button" type="submit">Submit</button> 
-          </div> 
-        </form>
-      </div>
+              <div className="submit-button-wrapper"> 
+                <button className="submit-button" type="submit">Submit</button> 
+              </div> 
+            </form>
+          </div>
+        </div>
+      )}
+
+      {loading == false && images.length != 0 && (
+        <h1>showing images</h1>
+      )}
     </div>
   )
  }
