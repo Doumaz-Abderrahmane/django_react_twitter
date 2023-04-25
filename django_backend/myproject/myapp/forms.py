@@ -8,3 +8,4 @@ class CheckboxForm(forms.Form):
     data_dist = forms.BooleanField(required=False)
     stance_dist = forms.BooleanField(required=False)
     local_dist = forms.BooleanField(required=False)
+    topic_detection = forms.BooleanField(required=False)

@@ -1,10 +1,10 @@
 import React from 'react';
-import CheckboxForm from './CheckboxForm';
+import Transformers from './Transformers';
 
 function App(){
   return (
     <div className="App">
-      <CheckboxForm />
+      <Transformers />
     </div>
   );
 }
