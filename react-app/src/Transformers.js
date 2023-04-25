@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import './Transformers.css';
 
 function Transformers() {
-  // const options = ['a', 'b', 'a', 'b', 'a', 'b', 'a']
   // const options = ["rm_null_attr", "cld_words", "lang_dist", "data_dist", "stance_dist", "local_dist", "topic_detection"]
   const [title, setTitle] = useState("");
   const [rm_null_attr, setRm_null_attr] = useState(false);
@@ -45,71 +45,86 @@ function Transformers() {
 
 
   return (
-    <div className="form-container">
-      <form onSubmit={handelSubmit}>
-        <label className="form-label" htmlFor="name">Title:</label> 
-        <input
-          className="form-input"
-          type="text"
-          id="name"
-          name="title"
-          onChange={(e) => setTitle(e.target.value)}
-        /> 
+    <div className="form-page-style">
+      <div className="logo-container">
+        <img src="./logo.webp"/>
+        <h1>Transformers</h1>
+      </div>
+      <div className="form-container">
+        <form onSubmit={handelSubmit}>
+          <label className="form-label" htmlFor="name">Title:</label> 
+          <input
+            className="form-input"
+            type="text"
+            id="name"
+            name="title"
+            onChange={(e) => setTitle(e.target.value)}
+          /> 
 
-        <input
-          type="checkbox"
-          name="rm_null_attr"
-          onChange={(e) => setRm_null_attr(e.target.checked)}
-        /> remove null attributes
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              name="rm_null_attr"
+              onChange={(e) => setRm_null_attr(e.target.checked)}
+            /> remove null attributes
+          </label>
 
-        <input
-          type="checkbox"
-          name="cld_words"
-          onChange={(e) => setCld_words(e.target.checked)}
-        /> cloud of words
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              name="cld_words"
+              onChange={(e) => setCld_words(e.target.checked)}
+            /> cloud of words
+          </label>
 
-        <input
-          type="checkbox"
-          name="lang_dist"
-          onChange={(e) => setLang_dist(e.target.checked)}
-        /> language distribution
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              name="lang_dist"
+              onChange={(e) => setLang_dist(e.target.checked)}
+            /> language distribution
+          </label>
 
-        <input
-          type="checkbox"
-          name="data_dist"
-          onChange={(e) => setData_dist(e.target.checked)}
-        /> data distribution
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              name="data_dist"
+              onChange={(e) => setData_dist(e.target.checked)}
+            /> data distribution
+          </label>
 
-        <input
-          type="checkbox"
-          name="stance_dist"
-          onChange={(e) => setStance_dist(e.target.checked)}
-        /> stance distribution
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              name="stance_dist"
+              onChange={(e) => setStance_dist(e.target.checked)}
+            /> stance distribution
+          </label>
 
-        <input
-          type="checkbox"
-          name="local_dist"
-          onChange={(e) => setLocal_dist(e.target.checked)}
-        /> local distribution
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              name="local_dist"
+              onChange={(e) => setLocal_dist(e.target.checked)}
+            /> local distribution
+          </label>
 
-        <input
-          type="checkbox"
-          name="topic_detection"
-          onChange={(e) => setTopic_detection(e.target.checked)}
-        /> topic detection
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              name="topic_detection"
+              onChange={(e) => setTopic_detection(e.target.checked)}
+            /> topic detection
+          </label>
 
 
-        <div className="submit-button-wrapper"> 
-          <button className="submit-button" type="submit">Submit</button> 
-        </div> 
-      </form>
+          <div className="submit-button-wrapper"> 
+            <button className="submit-button" type="submit">Submit</button> 
+          </div> 
+        </form>
+      </div>
     </div>
   )
  }
 
 export default Transformers;
-        // {options.map((option, index) => ( 
-        //   <label key={index} className="checkbox-label" id={`checkbox-label-${index + 1}`}> 
-        //     <input type="checkbox" name={`option${index + 1}`} /> {option} 
-        //   </label> 
-        // ))} 
