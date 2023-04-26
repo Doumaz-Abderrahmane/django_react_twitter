@@ -35,6 +35,4 @@ def index(request):
 
             print("\n\n\n")
             return HttpResponse(json.dumps({"error": "failed"}), content_type="application/json")
-    # else:
-    #     form = CheckboxForm()
-    # return render(request, 'index.html', {'form': form})
+    return render(request, 'index.html')

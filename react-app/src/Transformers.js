@@ -60,10 +60,22 @@ function Transformers() {
       )}
 
 
+    
+      {loading == false && images.length != 0 && (
+        <div className="images-page">
+          <div className="image-container">
+            {images.map((image, index) => (
+              <img key={index} src={`http://localhost:8000${image}`} alt={`image-${index-1}`}/>
+            ))}
+          </div>
+        </div>
+      )}
+
+
       {loading == false && images.length == 0 && (
         <div className="form-page">
           <div className="logo-container">
-            <img src="./logo.webp"/>
+            <img src="/logo.webp"/>
             <h1>Transformers</h1>
           </div>
           <div className="form-container">
@@ -144,15 +156,6 @@ function Transformers() {
 
 
 
-      {loading == false && images.length != 0 && (
-        <div className="images-page">
-          <div className="image-container">
-            {images.map((image, index) => (
-              <img key={index} src={`http://localhost:8000${image}`} alt={`image-${index-1}`}/>
-            ))}
-          </div>
-        </div>
-      )}
 
 
 
